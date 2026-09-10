@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Генератор паролей</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', path='/style.css') }}"
+    >
+</head>
+
+<body>
+    <main class="container">
+        <div class="generator">
+            <h1>Генератор паролей</h1>
+
+            <form action="/generate" method="post">
+                <div class="field">
+                    <label for="length">Длина пароля</label>
+
+                    <input
+                        id="length"
+                        type="number"
+                        name="length"
+                        min="1"
+                        max="{{ max_length }}"
+                        value="{{ length }}"
+                    >
+                </div>
+
+                <div class="options">
+                    <label>
+                        <input
+                            type="checkbox"
+                            name="use_upper"
+                            {% if use_upper %}checked{% endif %}
+                        >
+                        Заглавные буквы
+                    </label>
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            name="use_lower"
+                            {% if use_lower %}checked{% endif %}
+                        >
+                        Строчные буквы
+                    </label>
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            name="use_digits"
+                            {% if use_digits %}checked{% endif %}
+                        >
+                        Цифры
+                    </label>
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            name="use_special"
+                            {% if use_special %}checked{% endif %}
+                        >
+                        Специальные символы
+                    </label>
+                </div>
+
+                {% if error %}
+                    <div class="error">
+                        {{ error }}
+                    </div>
+                {% endif %}
+
+                {% if password %}
+                    <div class="result">
+                        {{ password }}
+                    </div>
+                {% endif %}
+
+                <button type="submit">
+                    Сгенерировать
+                </button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>
