@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block title %} HORSE{% endblock %}
+
+{% block links %}
+<style>
+
+    .posts-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    box-sizing: border-box;
+    }
+
+
+    .post {
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #faf7f2;
+    border: 1px solid rgba(201, 168, 118, 0.45);
+    border-left: 5px solid #c9a876;
+    border-radius: 14px;
+    padding: 24px 30px;
+    box-shadow: 0 4px 18px rgba(56, 42, 33, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-left-color 0.2s ease;
+    text-decoration: none;
+    }
+
+
+    .post:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(56, 42, 33, 0.1);
+    border-left-color: #382a21;
+    }
+
+
+    .post h2 {
+    color: #382a21;
+    font-size: 1.55rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    letter-spacing: 0.4px;
+    line-height: 1.3;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(201, 168, 118, 0.3);
+    }
+
+
+    .post p {
+    color: #382a21;
+    font-size: 1.05rem;
+    line-height: 1.65;
+    font-weight: 400;
+    white-space: pre-line; 
+    word-break: break-word; 
+    }
+
+
+    .empty-posts {
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    color: #8c7867;
+    font-size: 1.15rem;
+
+    padding: 55px 20px;
+    border: 2px dashed #c9a876;
+    border-radius: 16px;
+    background-color: rgba(240, 229, 211, 0.35);
+    }
+
+
+    @media (max-width: 600px) {
+    .post {
+    padding: 18px 20px;
+    }
+
+    .post h2 {
+    font-size: 1.3rem;
+    }
+
+    .post p {
+    font-size: 0.95rem;
+    }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="posts-container">
+    {% for post in posts %}
+        <a class="post" href="/posts/{{post.id}}">
+            <h2>{{ post.title }}</h2>
+            <p>{{ post.content }}</p>
+        </a>
+    {% else %}
+        <p class="empty-posts">пород пока что нет</p>
+    {% endfor %}
+</div>
+{% endblock %}

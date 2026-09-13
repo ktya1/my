@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}HORSE{% endblock %}</title>
+    {% block links %}{% endblock %}
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #f0e5d3;
+            color: #382a21;
+            font-family: 'Segoe UI', system-ui, -apple-system, Roboto, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 15px;
+        }
+
+
+        header {
+            width: 100%;
+            max-width: 960px;
+            background-color: #ffffff;
+            border: 1px solid #c9a876;
+            border-radius: 20px;
+            padding: 30px 35px;
+            box-shadow: 0 10px 30px rgba(56, 42, 33, 0.08);
+            margin-bottom: 25px;
+        }
+
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+            margin-bottom: 25px;
+        }
+
+
+        .left {
+            flex: 1;
+        }
+
+
+        .left  a {
+            display: inline-block;
+            color: #c9a876;
+            font-size: 2.5rem;
+            letter-spacing: 5px;
+            font-weight: 700;
+            text-decoration: none;
+            line-height: 1;
+            margin-bottom: 12px;
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+
+        .left  a:hover {
+            color: #382a21;
+            transform: scale(1.02);
+        }
+
+
+        .left h5 {
+            color: #382a21;
+            font-size: 1.2rem;
+            font-weight: 400;
+            line-height: 1.5;
+            padding-left: 14px;
+            border-left: 3px solid #c9a876;
+        }
+
+
+        .right {
+            flex-shrink: 0;
+        }
+
+        .header-img {
+            width: 280px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 14px;
+            border: 1px solid #c9a876;
+            display: block;
+            box-shadow: 0 6px 18px rgba(56, 42, 33, 0.1);
+        }
+
+
+        .nav-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(201, 168, 118, 0.35);
+        }
+
+
+        .nav-actions a {
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            padding: 11px 22px;
+            border-radius: 10px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+
+        .nav-actions a:nth-child(1) {
+            background-color: #382a21;
+            color: #f0e5d3;
+            border: 2px solid #382a21;
+        }
+
+        .nav-actions a:nth-child(1):hover {
+            background-color: #c9a876;
+            border-color: #c9a876;
+            color: #382a21;
+        }
+
+
+        .nav-actions a:nth-child(2) {
+            background-color: transparent;
+            color: #382a21;
+            border: 2px solid #c9a876;
+        }
+
+        .nav-actions a:nth-child(2):hover {
+            background-color: #f0e5d3;
+        }
+
+
+
+        main {
+            width: 100%;
+            max-width: 960px;
+            background-color: #ffffff;
+            border: 1px solid #c9a876;
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 10px 30px rgba(56, 42, 33, 0.05);
+            min-height: 250px;
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        @media (max-width: 768px) {
+            header, main {
+                padding: 20px 16px;
+            }
+
+            .header-top {
+                flex-direction: column-reverse;
+                gap: 18px;
+            }
+
+            .right, .header-img {
+                width: 100%;
+                height: 200px;
+            }
+
+            .left > a {
+                font-size: 2rem;
+            }
+
+            .left h5 {
+                font-size: 1.1rem;
+            }
+
+            .nav-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .nav-actions a,
+            .nav-actions a:nth-child(3) {
+                width: 100%;
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-top">
+        <div class="left">
+            <a href="/posts">HORSE</a>
+            <h5>лошади - это грация в каждом движении. Это необыкновенно и уникально</h5>
+        </div>
+
+        <div class="right">
+            <img src="https://i.pinimg.com/originals/b2/3b/f4/b23bf43d0a70911d9602a42ebc6a8bc9.jpg" alt="Лошади" class="header-img">
+        </div>
+    </div>
+
+    <div class="nav-actions">
+        <a href="/posts/create">создать новую породу</a>
+        <a href="">написать отзыв</a>
+
+    </div>
+</header>
+
+<main>
+    {% block content %} {% endblock %}
+</main>
+
+</body>
+</html>
