@@ -23,6 +23,7 @@ async def create_posts(
     post = Post(
         title = data.title,
         content = data.content,
+        all = data.all,
     )
 
 
@@ -77,7 +78,7 @@ async def update_post_put(
 
     post.title = data.title
     post.content = data.content
-    
+    post.all = data.all
     db.commit()
     db.refresh(post)
 
@@ -102,6 +103,8 @@ async def update_post_put(
 
     if data.content is not None:
         post.content = data.content
+    if data.all is not None:
+        post.all = data.all
 
     db.commit()
     db.refresh(post)

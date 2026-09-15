@@ -60,6 +60,10 @@
         <div class="post_body">
             <p class="post_content">Краткое описание: {{ post.content }}</p>
         </div>
+        <div class="post_body">
+            <p class="post_content">Полное описание: {{ post.all }}</p>
+        </div>
+
 
         <div class="but">
              <a href="/posts/{{post.id}}/patch" class="create">изменить данные о породе</a>

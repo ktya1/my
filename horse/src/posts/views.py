@@ -49,6 +49,7 @@ async def create_post_page(
 async def create_post(
     title: str = Form(...),
     content: str = Form(...),
+    all: str = Form(...),
     db: Session = Depends(get_db)
 ):
     
@@ -56,12 +57,11 @@ async def create_post(
     post = Post(
         title=title,
         content=content, 
+        all = all,
     )
-        
         
     db.add(post)
     db.commit()
-        
     db.refresh(post)
 
     return RedirectResponse(
@@ -113,6 +113,7 @@ async def update_post(
     post_id: int,
     title: str | None = Form(default=None),
     content: str | None = Form(default=None),
+    all: str | None = Form(default=None),
     db: Session = Depends(get_db),
 ):
     post = db.get(Post, post_id)
@@ -123,8 +124,13 @@ async def update_post(
         post.title = title.strip()
     if content is not None and content.strip():
         post.content = content.strip()
+        
+    if all is not None and all.strip():
+        post.all = all.strip()
 
     db.commit()
     db.refresh(post)
 
     return RedirectResponse(url="/posts", status_code=status.HTTP_303_SEE_OTHER)
+
+
