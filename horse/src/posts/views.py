@@ -70,6 +70,28 @@ async def create_post(
     )
 
 
+@router.delete("/{post_id}")  # Убрали лишнее слово /delete из пути
+async def delete_post(post_id: int, db: Session = Depends(get_db)):
+    # Проверка на валидность ID (опционально, можно доверить базе)
+    if post_id <= 0:
+        raise HTTPException(status_code=400, detail="ID поста не может быть отрицательным")
+
+    post = db.query(Post).filter(Post.id == post_id).first()
+    
+    if not post:
+        # Возвращаем 404, если пост не найден
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, 
+            detail="Пост не найден"
+        )
+    
+    db.delete(post)
+    db.commit()
+    
+    # Редирект обратно на список постов
+    from fastapi.responses import RedirectResponse
+    return RedirectResponse(url="/posts", status_code=status.HTTP_303_SEE_OTHER)
+
 @router.get('/{post_id}')
 async def get_post_one_page(
     request: Request,
@@ -132,5 +154,7 @@ async def update_post(
     db.refresh(post)
 
     return RedirectResponse(url="/posts", status_code=status.HTTP_303_SEE_OTHER)
+
+
 
 

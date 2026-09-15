@@ -3,7 +3,7 @@ from sqlalchemy.orm import Mapped , mapped_column
 from sqlalchemy import String,  Text
 
 class Post(Base):
-    __tablename__ = 'posts'
+    __tablename__ = 'zzz'
     #mapped - связь между типами данных. Помогает среде разработке
     id: Mapped[int] = mapped_column(
         primary_key = True

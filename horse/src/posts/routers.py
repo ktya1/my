@@ -47,8 +47,10 @@ async def delete_post(
     post = db.query(Post).filter(Post.id == post_id).first()
     if post is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="post not found")
+    
     db.delete(post)
     db.commit()
+
 
 #извлечение одного поста
 @router.get('/{post_id}', response_model=PostRead)
